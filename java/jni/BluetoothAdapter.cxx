@@ -787,7 +787,7 @@ void Java_tinyb_BluetoothAdapter_delete(JNIEnv *env, jobject obj)
     }
 }
 
-void Java_tinyb_BluetoothAdapter_setDiscoveryFilter(JNIEnv *env, jobject obj, jobject uuids, jint rssi, jint pathloss, jint transportType)
+void Java_tinyb_BluetoothAdapter_setDiscoveryFilter(JNIEnv *env, jobject obj, jobject uuids, jint rssi, jint pathloss, jint transportType, jboolean duplicateData)
 {
     try {
         BluetoothAdapter *obj_adapter = getInstance<BluetoothAdapter>(env, obj);
@@ -810,7 +810,7 @@ void Java_tinyb_BluetoothAdapter_setDiscoveryFilter(JNIEnv *env, jobject obj, jo
 
         TransportType t_type = from_int_to_transport_type((int) transportType);
 
-        obj_adapter->set_discovery_filter(native_uuids, (int16_t) rssi, (uint16_t) pathloss, t_type);
+        obj_adapter->set_discovery_filter(native_uuids, (int16_t) rssi, (uint16_t) pathloss, t_type, (bool) duplicateData);
     } catch (std::bad_alloc &e)     {
         raise_java_oom_exception(env, e);
     } catch (BluetoothException &e) {

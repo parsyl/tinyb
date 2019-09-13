@@ -257,13 +257,15 @@ public class BluetoothAdapter extends BluetoothObject
      * @param uuids a list of device UUIDs
      * @param rssi a rssi value
      * @param pathloss a pathloss value
+     * @param transportType type of scan to run 
+     * @param duplicateData whether or not to include duplicate advertisement data and service discovery
      */
-    public void setDiscoveryFilter(List<UUID> uuids, int rssi, int pathloss, TransportType transportType) {
+    public void setDiscoveryFilter(List<UUID> uuids, int rssi, int pathloss, TransportType transportType, boolean duplicateData) {
         List<String> uuidsFmt = new ArrayList<>(uuids.size());
         for (UUID uuid : uuids) {
             uuidsFmt.add(uuid.toString());
         }
-        setDiscoveryFilter(uuidsFmt, rssi, pathloss, transportType.ordinal());
+        setDiscoveryFilter(uuidsFmt, rssi, pathloss, transportType.ordinal(), duplicateData);
     }
 
     /** This method sets RSSI device discovery filter for the caller. When this method is called
@@ -271,7 +273,7 @@ public class BluetoothAdapter extends BluetoothObject
       * @param rssi a rssi value
       */
     public void setRssiDiscoveryFilter(int rssi) {
-        setDiscoveryFilter(Collections.EMPTY_LIST, rssi, 0, TransportType.AUTO);
+        setDiscoveryFilter(Collections.EMPTY_LIST, rssi, 0, TransportType.AUTO, false);
     }
 
     /** Returns the interface name of the adapter.
@@ -284,7 +286,7 @@ public class BluetoothAdapter extends BluetoothObject
 
     private native void delete();
 
-    private native void setDiscoveryFilter(List<String> uuids, int rssi, int pathloss, int transportType);
+    private native void setDiscoveryFilter(List<String> uuids, int rssi, int pathloss, int transportType, boolean duplicateData);
 
     private BluetoothAdapter(long instance)
     {

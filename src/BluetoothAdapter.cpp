@@ -212,7 +212,7 @@ bool BluetoothAdapter::remove_device (
 }
 
 bool BluetoothAdapter::set_discovery_filter (std::vector<BluetoothUUID> uuids,
-    int16_t rssi, uint16_t pathloss, const TransportType &transport)
+    int16_t rssi, uint16_t pathloss, const TransportType &transport, bool duplicate_data)
 {
     GError *error = NULL;
     bool result = true;
@@ -248,6 +248,8 @@ bool BluetoothAdapter::set_discovery_filter (std::vector<BluetoothUUID> uuids,
 
     if (!transport_str.empty())
         g_variant_dict_insert_value(&dict, "Transport", g_variant_new_string(transport_str.c_str()));
+
+    g_variant_dict_insert_value(&dict, "DuplicateData", g_variant_new_boolean(duplicate_data));
 
     GVariant *variant = g_variant_dict_end(&dict);
 
