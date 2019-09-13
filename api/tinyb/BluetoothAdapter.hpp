@@ -116,9 +116,10 @@ public:
       * @param rssi RSSI low bounded threshold
       * @param pathloss Pathloss threshold value
       * @param transport Type of scan to run
+      * @param duplicate_data whether or not to include duplicate advertisement data and service discovery 
       */
     bool set_discovery_filter (std::vector<BluetoothUUID> uuids,
-    int16_t rssi, uint16_t pathloss, const TransportType &transport);
+    int16_t rssi, uint16_t pathloss, const TransportType &transport, bool duplicate_data);
 
     /** Returns a list of BluetoothDevices visible from this adapter.
       * @return A list of BluetoothDevices visible on this adapter,

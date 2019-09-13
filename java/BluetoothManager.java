@@ -313,7 +313,7 @@ public class BluetoothManager
                 }
                 else if (APIVersionCode[0].equals("0") == true) {
                     if (Integer.valueOf(APIVersionCode[1]) < Integer.valueOf(nativeAPIVersionCode[1]))
-                        throw new RuntimeException("Java library is out of date. Please update the Java library.");
+                        throw new RuntimeException("Java library is out of date. Please update the Java library. nativeAPIVersion = " + nativeAPIVersion + ", apiVersion = " + APIVersion);
                     else throw new RuntimeException("Native library is out of date. Please update the native library.");
                 }
                 else if (Integer.valueOf(APIVersionCode[1]) < Integer.valueOf(nativeAPIVersionCode[1]))
