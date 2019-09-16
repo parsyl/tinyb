@@ -249,6 +249,8 @@ bool BluetoothAdapter::set_discovery_filter (std::vector<BluetoothUUID> uuids,
     if (!transport_str.empty())
         g_variant_dict_insert_value(&dict, "Transport", g_variant_new_string(transport_str.c_str()));
 
+    g_variant_dict_insert_value(&dict, "DuplicateData", g_variant_new_boolean(TRUE));
+
     GVariant *variant = g_variant_dict_end(&dict);
 
     result = adapter1_call_set_discovery_filter_sync(
